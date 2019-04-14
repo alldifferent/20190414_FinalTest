@@ -1,5 +1,6 @@
 package com.alldi.a20190414_finaltest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
                 String lenth = lenthEdt.getText().toString();
                 String weight = weightEdt.getText().toString();
-                
-                int numLenth = Integer.parseInt(lenth);
-                int numWeight = Integer.parseInt(weight);
+
+
+                Intent intent = new Intent(MainActivity.this, CalActivity.class);
+                intent.putExtra("키", lenth);
+                intent.putExtra("몸무게", weight);
+                startActivity(intent);
+
 
             }
         });
