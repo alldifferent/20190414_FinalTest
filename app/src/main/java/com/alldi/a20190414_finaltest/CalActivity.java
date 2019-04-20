@@ -3,63 +3,59 @@ package com.alldi.a20190414_finaltest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class CalActivity extends AppCompatActivity {
 
 
+    TextView bmiTxt;
     TextView resultTxt;
-    TextView typeTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cal);
 
-        resultTxt = findViewById(R.id.resultTxt);
-        typeTxt = findViewById(R.id.typeTxt);
+        bindViews();
+        setupEvents();
+        setValues();
+
+    }
+
+    void setupEvents(){
 
 
-        Intent intent = getIntent();
 
-        String height = intent.getStringExtra("키");
-        String weight = intent.getStringExtra("몸무게");
+    }
 
-        float numHeight = Float.parseFloat(height);
-        float numWeight = Float.parseFloat(weight);
+    void setValues(){
 
-        float Bmi = numWeight / (numHeight * numHeight);
+        double height = getIntent().getDoubleExtra("키", 0);
+        double weight = getIntent().getDoubleExtra("몸무게", 0);
 
-        if (Bmi >= 0 && Bmi < 18.5) {
-            String result = String.format("BMI 수치는 %f입니다.", Bmi);
-            String typeresult = String.format("BMI 수치가 %f이므로 저체중입니다.", Bmi);
-            resultTxt.setText(result);
-            typeTxt.setText(typeresult);
-        } else if (Bmi >= 18.5 && Bmi < 23) {
-            String result = String.format("BMI 수치는 %f입니다.", Bmi);
-            String typeresult = String.format("BMI 수치가 %f이므로 정상입니다.", Bmi);
-            resultTxt.setText(result);
-            typeTxt.setText(typeresult);
+        double BMI = weight/((height/100)*(height/100));
 
-        } else if (Bmi >= 23 && Bmi < 25) {
-            String result = String.format("BMI 수치는 %f입니다.", Bmi);
-            String typeresult = String.format("BMI 수치가 %f이므로 과체중입니다.", Bmi);
-            resultTxt.setText(result);
-            typeTxt.setText(typeresult);
+        resultTxt.setText(String.format("%f 입니다.",BMI));
 
-        } else if (Bmi >= 25 && Bmi < 30) {
-            String result = String.format("BMI 수치는 %f입니다.", Bmi);
-            String typeresult = String.format("BMI 수치가 %f이므로 비만입니다.", Bmi);
-            resultTxt.setText(result);
-            typeTxt.setText(typeresult);
-
-        } else {
-            String result = String.format("BMI 수치는 %f입니다.", Bmi);
-            String typeresult = String.format("BMI 수치가 %f이므로 고도비만입니다.", Bmi);
-            resultTxt.setText(result);
-            typeTxt.setText(typeresult);
-
+        if (BMI < 18.5){
+            bmiTxt.setText("저체중");
+        }else if(BMI<23){
+            bmiTxt.setText("정상");
+        }else if(BMI<25){
+            bmiTxt.setText("과체중");
+        }else if(BMI<30){
+            bmiTxt.setText("비만");
+        }else{
+            bmiTxt.setText("고도비만");
         }
 
+
+    }
+
+    void bindViews(){
+
+        bmiTxt = findViewById(R.id.bmiTxt);
+        resultTxt = findViewById(R.id.resultTxt);
     }
 }

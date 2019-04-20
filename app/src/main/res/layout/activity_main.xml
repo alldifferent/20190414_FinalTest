@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:background="#f7f7f7"
         >
 
         <TextView
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:hint="소수점 첫번째까지 작성하시오."
             android:id="@+id/lenthEdt"
-
+            android:inputType="numberDecimal"
+            android:singleLine="true"
             />
 
     </LinearLayout>
@@ -53,6 +55,8 @@
             android:layout_height="wrap_content"
             android:hint="소수점 첫번째까지 작성하시오."
             android:id="@+id/weightEdt"
+            android:singleLine="true"
+            android:inputType="numberDecimal"
             />
 
     </LinearLayout>
@@ -64,7 +68,7 @@
         >
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="확인"
             android:id="@+id/calBtn"
